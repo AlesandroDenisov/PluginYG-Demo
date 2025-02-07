@@ -565,7 +565,7 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Standalone: PLUGIN_YG_2;TMP_YG2
-    WebGL: RU_YG2;PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2
+    WebGL: RU_YG2;PLUGIN_YG_2;YandexGamesPlatform_yg;TMP_YG2;Authorization_yg
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
