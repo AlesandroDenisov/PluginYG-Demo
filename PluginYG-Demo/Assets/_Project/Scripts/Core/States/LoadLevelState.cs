@@ -1,4 +1,5 @@
 ﻿using HomoLudens.Services.PersistentProgress;
+using System;
 
 namespace HomoLudens.Core.States
 {
@@ -34,11 +35,18 @@ namespace HomoLudens.Core.States
 
         private void OnLoaded()
         {
+            InitProgress();
 //            InitUIRoot();
 //            InitGameWorld();
 //            InformProgressReaders();
 
             _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void InitProgress()
+        {
+            while (_progressService.Progress == null)
+                continue;
         }
 
         //        private const string InitialPointTag = "InitialPoint";

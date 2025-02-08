@@ -72,11 +72,11 @@ public class YGSaveLoadAsyncService : ISaveLoadAsyncService
         else
         {
             _progressService.Progress = LoadProgress() ?? NewProgress();
-            Debug.Log($"Created PlayerProgress with CurrentLevel = {_progressService.Progress.CurrentLevel}," +
+/*            Debug.Log($"Created PlayerProgress with CurrentLevel = {_progressService.Progress.CurrentLevel}," +
                         $"CurrentLoadedLevel = {_progressService.Progress.CurrentLoadedLevel}," +
                         $"MaxUnlockedLevel = {_progressService.Progress.MaxUnlockedLevel}," +
                         $"DeathCount = {_progressService.Progress.DeathCount}," +
-                        $"Collectables = {_progressService.Progress.Collectables}");
+                        $"Collectables = {_progressService.Progress.Collectables}");*/
         }
     }
 
@@ -98,11 +98,11 @@ public class YGSaveLoadAsyncService : ISaveLoadAsyncService
             Debug.Log("SaveGame loaded or new created from YG2!");
         }
 
-        Debug.Log($"Created PlayerProgress with CurrentLevel = {_progressService.Progress.CurrentLevel}," +
+/*        Debug.Log($"Created PlayerProgress with CurrentLevel = {_progressService.Progress.CurrentLevel}," +
                     $"CurrentLoadedLevel = {_progressService.Progress.CurrentLoadedLevel}," +
                     $"MaxUnlockedLevel = {_progressService.Progress.MaxUnlockedLevel}," +
                     $"DeathCount = {_progressService.Progress.DeathCount}," +
-                    $"Collectables = {_progressService.Progress.Collectables}");
+                    $"Collectables = {_progressService.Progress.Collectables}");*/
     }
 
     private PlayerProgress NewProgress()
@@ -110,19 +110,19 @@ public class YGSaveLoadAsyncService : ISaveLoadAsyncService
         return new PlayerProgress();
     }
 
-    private void OnFirstGameSession()
+/*    private void OnFirstGameSession()
     {
         _progressService.Progress = NewProgress();
     }
     private void OnDataLoaded()
     {
         throw new NotImplementedException();
-    }
+    }*/
 
-    public void ResetProgress()
+/*    public void ResetProgress()
     {
         YG2.SetDefaultSaves();
-    }
+    }*/
 
     public PlayerProgress LoadProgress()
     {
