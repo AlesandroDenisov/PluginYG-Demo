@@ -1,0 +1,3 @@
+Build path: C:/Users/Admin/Documents/Unity/PluginYG/Builds/PluginYG-Demo
+Build number: 2
+PluginYG version: 2.0031

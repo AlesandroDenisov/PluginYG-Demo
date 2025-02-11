@@ -25,7 +25,7 @@ namespace HomoLudens.Core.States
                                                              ),
                 [typeof(LoadProgressState)] = new LoadProgressState( this
                                                                    , services.Single<IPersistentProgressService>()
-                                                                   , services.Single<ISaveLoadAsyncService>()
+                                                                   , services.Single<ISaveLoadService>()
                                                                    , coroutineRunner
                                                                    ),
                 [typeof(LoadLevelState)] = new LoadLevelState(this

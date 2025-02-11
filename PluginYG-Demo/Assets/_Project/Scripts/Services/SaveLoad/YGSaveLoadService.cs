@@ -11,7 +11,7 @@ using System.Collections;
 namespace HomoLudens.Services.SaveLoad
 {
     // This class save and load the player's progress for Yandex Games
-    public class YGSaveLoadService : ISaveLoadService
+    public class YGSaveLoadService //: ISaveLoadService
     {
         private const string ProgressKey = "Progress";
 

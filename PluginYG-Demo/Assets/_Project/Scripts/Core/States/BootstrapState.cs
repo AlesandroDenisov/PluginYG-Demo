@@ -52,10 +52,12 @@ namespace HomoLudens.Core.States
                                                                   , _services.Single<IPersistentProgressService>()
                                                                   , _services.Single<IUIWindowService>()
                                                                   ));*/
-            _services.RegisterSingle<ISaveLoadAsyncService>(new YGSaveLoadAsyncService( _services.Single<IPersistentProgressService>()
-                                                                                      , _coroutineRunner
+//            _services.RegisterSingle<ISaveLoadAsyncService>(new YGSaveLoadAsyncService( _services.Single<IPersistentProgressService>()
+//                                                                                      , _coroutineRunner
 //                                                                                 , _services.Single<IGameFactory>()) );
-                                                        ));
+//                                                        ));
+            _services.RegisterSingle<ISaveLoadService>(new SaveLoadService(_services.Single<IPersistentProgressService>()
+                                                                           , _coroutineRunner ));
         }
 
         // After loading InitialScene move to new state LoadProgressState

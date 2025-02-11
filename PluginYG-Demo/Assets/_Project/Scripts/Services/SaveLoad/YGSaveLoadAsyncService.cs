@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using YG;
 
-public class YGSaveLoadAsyncService : ISaveLoadAsyncService
+public class YGSaveLoadAsyncService //: ISaveLoadAsyncService
 {
     private const string ProgressKey = "Progress";
     private readonly IPersistentProgressService _progressService;
@@ -109,15 +109,6 @@ public class YGSaveLoadAsyncService : ISaveLoadAsyncService
     {
         return new PlayerProgress();
     }
-
-/*    private void OnFirstGameSession()
-    {
-        _progressService.Progress = NewProgress();
-    }
-    private void OnDataLoaded()
-    {
-        throw new NotImplementedException();
-    }*/
 
 /*    public void ResetProgress()
     {

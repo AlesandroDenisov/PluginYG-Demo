@@ -35,7 +35,7 @@ namespace HomoLudens.Core.States
 
         private void OnLoaded()
         {
-            InitProgress();
+            //InitProgress();
 //            InitUIRoot();
 //            InitGameWorld();
 //            InformProgressReaders();

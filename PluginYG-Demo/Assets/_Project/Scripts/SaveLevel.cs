@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YG;
 
-public class SaveLevel : MonoBehaviour
+public class SaveLoad : MonoBehaviour
 {
     public Button AddLevelButton;
     public Button SaveLevelButton;
@@ -13,12 +13,13 @@ public class SaveLevel : MonoBehaviour
     public Button ResetLevelButton;
 
     private int _currentLevel = 0;
-    public Text currentLevelText;
 
+    public Text currentLevelText;
     public Text isSDKEnabledText;
     public Text isFirstGameSessionText;
-
     public Text YG2savesText;
+
+    private PlayerProgress progress;
 
     // Start is called before the first frame update
     void Start()
@@ -28,10 +29,12 @@ public class SaveLevel : MonoBehaviour
         LoadLevelButton.onClick.AddListener(delegate { LoadProgressCloud(); });
         ResetLevelButton.onClick.AddListener(delegate { ResetProgress(); });
 
-/*        if (YG2.isSDKEnabled)
-            LoadProgressCloud();*/
+        progress = new PlayerProgress();
 
-        
+        /*        if (YG2.isSDKEnabled)
+                    LoadProgressCloud();*/
+
+
         //_currentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
 
     }
@@ -64,6 +67,9 @@ public class SaveLevel : MonoBehaviour
         _currentLevel++;
         Debug.Log($"_currentLevel = {_currentLevel}");
 
+        progress.SetCurrentLevel(_currentLevel);
+        Debug.Log($"progress.CurrentLevel = {progress.CurrentLevel}");
+
         //PlayerPrefs.SetInt("CurrentLevel", _currentLevel);
 
         UpdateText();
@@ -71,8 +77,6 @@ public class SaveLevel : MonoBehaviour
 
     private void SaveProgressCloud()
     {
-        PlayerProgress progress = new PlayerProgress(_currentLevel);
-
         YG2.saves += progress;
 
         YG2.SaveProgress(); 

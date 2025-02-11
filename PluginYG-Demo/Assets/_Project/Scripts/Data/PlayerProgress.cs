@@ -24,57 +24,65 @@ namespace HomoLudens.Data
             CurrentLevel = level;
         }
 
-        public static explicit operator PlayerProgress(SavesYG savesYG) =>
-            new PlayerProgress()
+        public void SetCurrentLevel(int level) => CurrentLevel = level;
+
+        public static explicit operator PlayerProgress(SavesYG saves)
+        {
+            if (saves == null)
             {
-                CurrentLevel = savesYG.CurrentLevel,
+                throw new ArgumentNullException(nameof(saves), "SavesYG object cannot be null.");
+            }
+
+            return new PlayerProgress{
+                CurrentLevel = saves.CurrentLevel
             };
+        }
 
-        /* 
-                // Player state
-                public int CurrentLoadedLevel;
-                public int MaxUnlockedLevel = 0;
-                public int HighScore = 0;
+    /* 
+            // Player state
+            public int CurrentLoadedLevel;
+            public int MaxUnlockedLevel = 0;
+            public int HighScore = 0;
 
-                public int DeathCount = 0;
-                public int Collectables = 0;
+            public int DeathCount = 0;
+            public int Collectables = 0;
 
-                public bool IsDemo = false;
+            public bool IsDemo = false;
 
-                public PlayerStats PlayerStats;
+            public PlayerStats PlayerStats;
 
-                //public GameObject[] m_Diamonds;
+            //public GameObject[] m_Diamonds;
 
-                // Music state
-                public bool m_IsIngameMusicPlaying;
-                public float MusicVolume;
-                public float EffectsVolume;
+            // Music state
+            public bool m_IsIngameMusicPlaying;
+            public float MusicVolume;
+            public float EffectsVolume;
 
-                public PlayerProgress()
+            public PlayerProgress()
+            {
+                //WorldData = new WorldData(initialLevel);
+                //ResourceData = new ResourceData();
+
+                CurrentLoadedLevel = 0;
+                MaxUnlockedLevel = 0;
+                HighScore = 0;
+                DeathCount = 0;
+                Collectables = 0;
+
+                PlayerStats = new PlayerStats();
+            }
+
+            public static explicit operator PlayerProgress(SavesYG savesYG) =>
+                new PlayerProgress()
                 {
-                    //WorldData = new WorldData(initialLevel);
-                    //ResourceData = new ResourceData();
+                    CurrentLevel = savesYG.CurrentLevel,
+                    MaxUnlockedLevel = savesYG.MaxUnlockedLevel,
+                    HighScore = savesYG.HighScore,
+                    DeathCount = savesYG.DeathCount,
+                    Collectables = savesYG.Collectables
+                };
 
-                    CurrentLoadedLevel = 0;
-                    MaxUnlockedLevel = 0;
-                    HighScore = 0;
-                    DeathCount = 0;
-                    Collectables = 0;
-
-                    PlayerStats = new PlayerStats();
-                }
-
-                public static explicit operator PlayerProgress(SavesYG savesYG) =>
-                    new PlayerProgress()
-                    {
-                        CurrentLevel = savesYG.CurrentLevel,
-                        MaxUnlockedLevel = savesYG.MaxUnlockedLevel,
-                        HighScore = savesYG.HighScore,
-                        DeathCount = savesYG.DeathCount,
-                        Collectables = savesYG.Collectables
-                    };
-
-                public void SetCurrentLevel(int level) => CurrentLevel = level;
-        */
-    }
+            public void SetCurrentLevel(int level) => CurrentLevel = level;
+    */
+}
 }

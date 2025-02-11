@@ -13,10 +13,16 @@ namespace YG
             return savesYG;
         }
 
-        public static SavesYG operator +(SavesYG savesYG, int currentLevel)
+        public static explicit operator SavesYG(PlayerProgress playerProgress)
         {
-            savesYG.CurrentLevel = currentLevel;
-            return savesYG;
+            if (playerProgress == null)
+            {
+                throw new ArgumentNullException(nameof(playerProgress), "PlayerProgress object cannot be null.");
+            }
+
+            return new SavesYG { 
+                CurrentLevel = playerProgress.CurrentLevel 
+            };
         }
 
         /*        
