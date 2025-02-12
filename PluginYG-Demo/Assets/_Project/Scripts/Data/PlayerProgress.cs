@@ -12,31 +12,44 @@ namespace HomoLudens.Data
         //public WorldData WorldData;
         //public ResourceData ResourceData;
 
-       public int CurrentLevel { get; private set; }
+        [field: SerializeField] public int CurrentLevel { get; private set; }
 
         public PlayerProgress()
         {
             CurrentLevel = 0;
         }
 
-        public PlayerProgress(int level)
+        public PlayerProgress(PlayerProgress other)
         {
-            CurrentLevel = level;
+            CurrentLevel = other.CurrentLevel;
         }
 
         public void SetCurrentLevel(int level) => CurrentLevel = level;
 
-        public static explicit operator PlayerProgress(SavesYG saves)
+        public PlayerProgress DeepCopy()
+        {
+            return new PlayerProgress(this);
+        }
+
+/*        public static explicit operator PlayerProgress(SavesYG saves)
         {
             if (saves == null)
             {
                 throw new ArgumentNullException(nameof(saves), "SavesYG object cannot be null.");
             }
 
-            return new PlayerProgress{
-                CurrentLevel = saves.CurrentLevel
+            return new PlayerProgress
+            {
+                CurrentLevel = saves.CurrentLevel,
+
+                //MaxUnlockedLevel = savesYG.MaxUnlockedLevel,
+                //HighScore = savesYG.HighScore,
+                //DeathCount = savesYG.DeathCount,
+                //Collectables = savesYG.Collectables
             };
-        }
+        }*/
+    }
+}
 
     /* 
             // Player state
@@ -71,18 +84,4 @@ namespace HomoLudens.Data
 
                 PlayerStats = new PlayerStats();
             }
-
-            public static explicit operator PlayerProgress(SavesYG savesYG) =>
-                new PlayerProgress()
-                {
-                    CurrentLevel = savesYG.CurrentLevel,
-                    MaxUnlockedLevel = savesYG.MaxUnlockedLevel,
-                    HighScore = savesYG.HighScore,
-                    DeathCount = savesYG.DeathCount,
-                    Collectables = savesYG.Collectables
-                };
-
-            public void SetCurrentLevel(int level) => CurrentLevel = level;
     */
-}
-}

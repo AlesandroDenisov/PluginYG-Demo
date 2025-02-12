@@ -40,7 +40,9 @@ public class YGSaveLoadAsyncService //: ISaveLoadAsyncService
         PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
         Debug.Log("Progress saved to PlayerPrefs");
 
-        YG2.saves += _progressService.Progress;
+        //YG2.saves += _progressService.Progress;
+        YG2.saves.Progress = _progressService.Progress.DeepCopy();
+
         YG2.SaveProgress();
         Debug.Log("Progress saved to Yandex Storage");
     }
@@ -52,7 +54,9 @@ public class YGSaveLoadAsyncService //: ISaveLoadAsyncService
         PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
         Debug.Log("Progress saved to PlayerPrefs");
 
-        YG2.saves += _progressService.Progress;
+        //YG2.saves += _progressService.Progress;
+        YG2.saves.Progress = _progressService.Progress.DeepCopy();
+
         YG2.SaveProgress();
         Debug.Log("Progress saved to Yandex Storage");
     }
@@ -94,7 +98,8 @@ public class YGSaveLoadAsyncService //: ISaveLoadAsyncService
         else
         {
             yield return new WaitUntil(() => YG2.saves != null);
-            _progressService.Progress = YG2.saves is SavesYG savedProgress ? (PlayerProgress)savedProgress : NewProgress();
+            //_progressService.Progress = YG2.saves is SavesYG savedProgress ? (PlayerProgress)savedProgress : NewProgress();
+            _progressService.Progress = YG2.saves.Progress.DeepCopy();
             Debug.Log("SaveGame loaded or new created from YG2!");
         }
 

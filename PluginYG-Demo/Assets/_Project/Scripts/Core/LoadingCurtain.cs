@@ -23,12 +23,13 @@ namespace HomoLudens.Core
     
         private IEnumerator DoFadeIn()
         {
-            while (Curtain.alpha > 0)
+            while (Curtain.alpha > 0.001f)
             {
             Curtain.alpha -= 0.03f;
             yield return new WaitForSeconds(0.03f);
             }
-      
+
+            Curtain.alpha = 0;
             gameObject.SetActive(false);
         }
     }

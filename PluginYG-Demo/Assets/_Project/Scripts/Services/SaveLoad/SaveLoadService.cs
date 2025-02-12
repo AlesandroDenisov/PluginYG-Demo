@@ -24,7 +24,7 @@ namespace HomoLudens.Services.SaveLoad
                              //, IGameFactory gameFactory
                              )
         {
-            //_progressService = progressService;
+            _progressService = progressService;
             _coroutineRunner = coroutineRunner;
         }
 
@@ -51,8 +51,13 @@ namespace HomoLudens.Services.SaveLoad
 
             if (_isDataLoaded)
             {
+                //_progressService.Progress = (PlayerProgress)YG2.saves;
+                _progressService.Progress = YG2.saves.Progress.DeepCopy();
                 onLoaded?.Invoke();
-                Debug.Log("[SaveLoadService] Данные успешно загружены!");
+                Debug.Log("[SaveLoadService.WaitingLoadProgress()] Данные успешно загружены!");
+                Debug.Log($"[SaveLoadService.WaitingLoadProgress()] YG2.saves.Progress = {YG2.saves.Progress.ToJson()}");
+                Debug.Log($"[SaveLoadService.WaitingLoadProgress()] _progressService.Progress = {_progressService.Progress.ToJson()}");
+
             }
             else
             {
@@ -65,7 +70,9 @@ namespace HomoLudens.Services.SaveLoad
         private void NewProgress()
         {
             PlayerProgress progress = new PlayerProgress();
-            YG2.saves = (SavesYG)progress;
+            _progressService.Progress = progress;
+            //YG2.saves = (SavesYG)progress;
+            YG2.saves.Progress = progress.DeepCopy();
         }
 
         public void LoadProgress(Action onLoaded = null)
@@ -74,17 +81,20 @@ namespace HomoLudens.Services.SaveLoad
 
             YGInsides.LoadProgress();
 
-            Debug.Log(YG2.saves.ToJson());
+            Debug.Log(YG2.saves.Progress.ToJson());
 
             _isDataLoaded = true;
             //onLoaded?.Invoke();
         }
 
-        // TODO: move the progress to the separate service
-        public void SaveProgress(PlayerProgress progress)
+        public void SaveProgress()
         {
+            //YG2.saves += progress;
             //YG2.saves += _progressService.Progress;
-            YG2.saves += progress;
+            YG2.saves.Progress = _progressService.Progress.DeepCopy();
+
+            Debug.Log($"[SaveLoadService.SaveProgress()] YG2.saves.Progress = {YG2.saves.Progress.ToJson()}");
+            Debug.Log($"[SaveLoadService.SaveProgress()] _progressService.Progress = {_progressService.Progress.ToJson()}");
 
             YG2.SaveProgress();
             Debug.Log($"[SaveProgress] Progress saved!");
@@ -92,10 +102,13 @@ namespace HomoLudens.Services.SaveLoad
             // TODO: добавить сохранение в PlayerPrefs
         }
 
-        public void ResetProgress(PlayerProgress progress)
+        public void ResetProgress()
         {
             YG2.SetDefaultSaves();
-            progress = (PlayerProgress)YG2.saves;
+            //progress = (PlayerProgress)YG2.saves;
+            //_progressService.Progress = (PlayerProgress)YG2.saves;
+            _progressService.Progress = YG2.saves.Progress.DeepCopy();
+
             YG2.SaveProgress();
             Debug.Log("[ResetProgress] Progress was reset!");
         }

@@ -40,7 +40,8 @@ namespace HomoLudens.Services.SaveLoad
 //                progressWriter.UpdateProgress(_progressService.Progress);
 
 #if !UNITY_EDITOR//UNITY_WEBGL
-            YG2.saves += _progressService.Progress;
+            //YG2.saves += _progressService.Progress;
+            YG2.saves.Progress = _progressService.Progress.DeepCopy();
             YG2.SaveProgress();
 #elif UNITY_EDITOR
             // save the player's progress
@@ -102,7 +103,8 @@ namespace HomoLudens.Services.SaveLoad
         public PlayerProgress LoadProgress()
         {
 #if !UNITY_EDITOR//UNITY_WEBGL
-            return YG2.saves is SavesYG savedProgress ? (PlayerProgress)savedProgress : null;
+            //return YG2.saves is SavesYG savedProgress ? (PlayerProgress)savedProgress : null;
+            return YG2.saves?.Progress;
 #elif UNITY_EDITOR
             return PlayerPrefs.GetString(ProgressKey)?
                     .ToDeserialized<PlayerProgress>();

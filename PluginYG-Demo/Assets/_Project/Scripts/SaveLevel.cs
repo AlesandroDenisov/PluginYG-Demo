@@ -49,13 +49,14 @@ public class SaveLoad : MonoBehaviour
 
         if (YG2.isFirstGameSession)
         {
-            //_progressService.Progress = NewProgress();
-            _currentLevel = YG2.saves.CurrentLevel;
+            //_currentLevel = YG2.saves.CurrentLevel;
+            _currentLevel = YG2.saves.Progress.CurrentLevel;
             Debug.Log($"[LoadProgressCloud] Progress created new!");
         }
         else
         {
-            _currentLevel = YG2.saves.CurrentLevel;
+            //_currentLevel = YG2.saves.CurrentLevel;
+            _currentLevel = YG2.saves.Progress.CurrentLevel;
             Debug.Log($"[LoadProgressCloud] Progress loaded!");
         }
 
@@ -77,7 +78,8 @@ public class SaveLoad : MonoBehaviour
 
     private void SaveProgressCloud()
     {
-        YG2.saves += progress;
+        //YG2.saves += progress;
+        YG2.saves.Progress = progress.DeepCopy();
 
         YG2.SaveProgress(); 
         Debug.Log($"[SaveProgressCloud] Progress saved!");
